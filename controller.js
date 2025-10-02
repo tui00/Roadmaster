@@ -5,7 +5,7 @@ function setup(baseSpeed) {
     // Если значение почти ноль (например, cos(90°) = 6.12e-17), оно обнуляется.
     // Иначе возвращается знак (+1 или -1). Это делает движение дискретным.
 
-    function updateCoords(x, y, a, input) {
+    function updatePlayer(x, y, a, input) {
         var radians = (a - 90) * (Math.PI / 180);
         // Комментарий: угол "a" хранится в градусах, но для cos/sin нужны радианы.
         // Смещение на -90° нужно, чтобы "0°" в логике программы совпадало с осью Y,
@@ -34,6 +34,6 @@ function setup(baseSpeed) {
         return { x: x, y: y, a: a };
     }
 
-    return updateCoords;
+    return updatePlayer;
 }
 exports.setup = setup;
