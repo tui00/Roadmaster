@@ -17,53 +17,20 @@ const currentCar = () => CARS.VOLKSWAGEN_POLO;
 
 // === Доступные машины ===
 const CARS = {
-  YANDEX_SCOOTER: {
-    maxDriveSpeed: 1.5,
-    maxReverseSpeed: 0.5,
-    accelStep: 0.15,
-    breakStep: 0.25,
-    neutralStep: 0.2,
-  },
-
-  FORMULA_1: {
-    maxDriveSpeed: 8,
-    maxReverseSpeed: 3,
-    accelStep: 1.2,
-    breakStep: 1.5,
-    neutralStep: 0.05,
-  },
-
-  KIA_SPORTAGE: {
-    maxDriveSpeed: 3.5,
-    maxReverseSpeed: 1.5,
-    accelStep: 0.25,
-    breakStep: 0.35,
-    neutralStep: 0.12,
-  },
-
-  TOYOTA_CRETA: {
-    maxDriveSpeed: 3,
-    maxReverseSpeed: 1,
-    accelStep: 0.2,
-    breakStep: 0.3,
-    neutralStep: 0.15,
-  },
-
-  VOLKSWAGEN_POLO: {
-    maxDriveSpeed: 2,
-    maxReverseSpeed: 1,
-    accelStep: 0.2,
-    breakStep: 0.3,
-    neutralStep: 0.1,
-  }
+    YANDEX_SCOOTER: [1.5, 0.5, 0.15, 0.25, 0.2],
+    FORMULA_1: [8, 3, 1.2, 1.5, 0.05],
+    KIA_SPORTAGE: [3.5, 1.5, 0.25, 0.35, 0.12],
+    TOYOTA_CRETA: [3, 1, 0.2, 0.3, 0.15],
+    VOLKSWAGEN_POLO: [2, 1, 0.2, 0.3, 0.1]
 };
+
 // === Параметры машины ===
-const maxDriveSpeed = currentCar().maxDriveSpeed;
-const maxReverseSpeed = currentCar().maxReverseSpeed;
+const maxDriveSpeed = currentCar()[0];
+const maxReverseSpeed = currentCar()[1];
 // -
-const accelStep = currentCar().accelStep;
-const breakStep = currentCar().breakStep;
-const neutralStep = currentCar().neutralStep;
+const accelStep = currentCar()[2];
+const breakStep = currentCar()[3];
+const neutralStep = currentCar()[4];
 // -
 const rotationStep = 45;
 // -
@@ -97,9 +64,9 @@ var controller = require("./controller").setup(
     accelStep,
     breakStep,
     neutralStep,
-    
+
     rotationStep,
-    
+
     speedChangeInterval,
 
     "speed",
