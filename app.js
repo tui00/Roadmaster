@@ -9,13 +9,61 @@ const UPS = 60; // Updates per second
 // -
 const CELL_SCALE = 4;
 
+// === Текущяя машина
+const currentCar = () => CARS.VOLKSWAGEN_POLO;
+
+
+// !!! Дальше то что лучше не трогать !!!
+
+// === Доступные машины ===
+const CARS = {
+  YANDEX_SCOOTER: {
+    maxDriveSpeed: 1.5,
+    maxReverseSpeed: 0.5,
+    accelStep: 0.15,
+    breakStep: 0.25,
+    neutralStep: 0.2,
+  },
+
+  FORMULA_1: {
+    maxDriveSpeed: 8,
+    maxReverseSpeed: 3,
+    accelStep: 1.2,
+    breakStep: 1.5,
+    neutralStep: 0.05,
+  },
+
+  KIA_SPORTAGE: {
+    maxDriveSpeed: 3.5,
+    maxReverseSpeed: 1.5,
+    accelStep: 0.25,
+    breakStep: 0.35,
+    neutralStep: 0.12,
+  },
+
+  TOYOTA_CRETA: {
+    maxDriveSpeed: 3,
+    maxReverseSpeed: 1,
+    accelStep: 0.2,
+    breakStep: 0.3,
+    neutralStep: 0.15,
+  },
+
+  VOLKSWAGEN_POLO: {
+    maxDriveSpeed: 2,
+    maxReverseSpeed: 1,
+    accelStep: 0.2,
+    breakStep: 0.3,
+    neutralStep: 0.1,
+  }
+};
 // === Параметры машины ===
-const maxDriveSpeed = 2;
-const maxReverseSpeed = 1;
+const maxDriveSpeed = currentCar().maxDriveSpeed;
+const maxReverseSpeed = currentCar().maxReverseSpeed;
 // -
-const accelStep = 0.2; // В реальных машинах тормоз тоже сильнее двигателя 
-const breakStep = 0.3;
-const neutralStep = 0.1;
+const accelStep = currentCar().accelStep; // В реальных машинах тормоз тоже сильнее двигателя 
+const breakStep = currentCar().breakStep;
+const neutralStep = currentCar().neutralStep;
 // -
 const rotationStep = 45;
 // -
