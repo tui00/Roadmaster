@@ -5,9 +5,9 @@ const LEFT_PIN = D19;
 const RIGHT_PIN = D23;
 
 // === Параметры дисплея и физики ===
-const UPS = 30; // Updates per second
+const UPS = 60; // Updates per second
 // -
-const CELL_SCALE = 5;
+const CELL_SCALE = 4;
 
 // === Параметры машины ===
 const maxDriveSpeed = 2;

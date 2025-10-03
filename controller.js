@@ -21,7 +21,11 @@ function setup(
     setInterval(() => {
         if (drive && speed < maxDriveSpeed) {
             global[needUpdateRef] = true;
-            speed += accelStep; // Ускоряемся, если едем прямо и максимальная скорость не достигнута
+            if (speed >= 0) {
+                speed += accelStep; // Ускоряемся
+            } else {
+                speed += breakStep; // Тормозим
+            }
         } else if (reverse && -speed < maxReverseSpeed) {
             global[needUpdateRef] = true;
 
