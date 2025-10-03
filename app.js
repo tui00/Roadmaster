@@ -17,7 +17,7 @@ var needUpdate = true;
 
 var x = 2;
 var y = 2;
-var a = 135;
+var a = 45;
 
 // Setup
 [

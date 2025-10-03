@@ -26,7 +26,7 @@ function setup(driveSpeed, reverseSpeed, accelerationStep, rotationStep, accelIn
     }
 
     function updatePlayer(x, y, a, input) {
-        var radians = (a - 90) * (Math.PI / 180);
+        var radians = a * (Math.PI / 180);
         // Комментарий: угол "a" хранится в градусах, но для cos/sin нужны радианы.
         // Смещение на -90° нужно, чтобы "0°" в логике программы совпадало с осью Y,
         // а не X, как в стандартной математике.
