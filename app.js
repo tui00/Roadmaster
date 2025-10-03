@@ -7,7 +7,8 @@ const FPS = 30;
 
 const CELL_SCALE = 5;
 
-const BASE_SPEED = 2;
+var driveSpeed = 2;
+var reverseSpeed = 1;
 
 var needUpdate = true;
 
@@ -24,7 +25,7 @@ var a = 135;
 ].forEach((pin) => pin.mode("input"));
 
 var radio = require("./radio").setup(FORWARD_PIN, BACKWARD_PIN, LEFT_PIN, RIGHT_PIN, "needUpdate");
-var controller = require("./controller").setup(BASE_SPEED);
+var controller = require("./controller").setup(driveSpeed, reverseSpeed, "needUpdate");
 var display = require("./display").setup(CELL_SCALE);
 setInterval(() => {
     if (needUpdate) {
