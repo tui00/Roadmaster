@@ -10,7 +10,7 @@ const UPS = 60; // Updates per second
 const CELL_SCALE = 4;
 
 // === Текущяя машина
-const currentCar = () => CARS.VOLKSWAGEN_POLO;
+const currentCar = () => CARS.NO_CAR;
 
 
 // !!! Дальше то что лучше не трогать !!!
@@ -21,7 +21,8 @@ const CARS = {
     FORMULA_1: [8, 3, 1.2, 1.5, 0.05],
     KIA_SPORTAGE: [3.5, 1.5, 0.25, 0.35, 0.12],
     TOYOTA_CRETA: [3, 1, 0.2, 0.3, 0.15],
-    VOLKSWAGEN_POLO: [2, 1, 0.2, 0.3, 0.1]
+    VOLKSWAGEN_POLO: [2, 1, 0.2, 0.3, 0.1],
+    NO_CAR: [0, 0, 0, 0, 0],
 };
 
 // === Параметры машины ===
