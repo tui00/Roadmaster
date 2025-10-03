@@ -1,43 +1,54 @@
-// Controller
-function setup(driveSpeed, reverseSpeed, accelerationStep, rotationStep, accelInterval, needUpdateRef) {
-    var drive = false;
-    var reverse = false;
-    var speed = 0;
+// === Параметры ===
+function setup(
+    maxDriveSpeed,
+    maxReverseSpeed,
 
-    const trigSign = v => v;
-    // const trigSign = v => Math.abs(v) < 1e-12 ? 0 : Math.sign(v);
-    // Комментарий: функция устраняет «дрожание» из-за неточных вычислений.
-    // Если значение почти ноль (например, cos(90°) = 6.12e-17), оно обнуляется.
-    // Иначе возвращается знак (+1 или -1). Это делает движение дискретным.
+    accelStep,
+    breakStep,
+    neutralStep,
 
-    function config() {
-        setInterval(() => {
-            if (drive && speed < driveSpeed) {
-                speed += accelerationStep;
-            } else if (reverse && -speed < reverseSpeed) {
-                speed -= accelerationStep;
+    rotationStep,
+
+    speedChangeInterval,
+
+    needUpdateRef
+) {
+    var drive = false; // Мы едем прямо?
+    var reverse = false; // Мы едем задним ходом?
+    var speed = 0; // Наша скорость
+
+    // === Цикл обнавления скорости ===
+    setInterval(() => {
+        if (drive && speed < maxDriveSpeed) {
+            global[needUpdateRef] = true;
+            speed += accelStep; // Ускоряемся, если едем прямо и максимальная скорость не достигнута
+        } else if (reverse && -speed < maxReverseSpeed) {
+            global[needUpdateRef] = true;
+
+            if (speed <= 0) {
+                speed -= accelStep; // Ускоряемся
+            } else {
+                speed -= breakStep; // Тормозим
             }
-            if (Math.abs(speed) > 1e-12 && !drive && !reverse) {
-                global[needUpdateRef] = true;
-                if (speed > 0) speed -= accelerationStep;
-                if (speed < 0) speed += accelerationStep;
-            }
-        }, accelInterval);
-    }
+        }
+        if (Math.abs(speed) > 1e-12 && !drive && !reverse) {
+            global[needUpdateRef] = true;
+            if (speed > 0) speed -= neutralStep; // Останавливаемя, если не едем
+            if (speed < 0) speed += neutralStep;
+        }
+    }, speedChangeInterval);
 
+    // == Основной цикл контроллера ===
     function updatePlayer(x, y, a, input) {
         var radians = a * (Math.PI / 180);
-        // Комментарий: угол "a" хранится в градусах, но для cos/sin нужны радианы.
-        // Смещение на -90° нужно, чтобы "0°" в логике программы совпадало с осью Y,
-        // а не X, как в стандартной математике.
 
         drive = input.drive;
         reverse = input.reverse;
         var left = input.left;
         var right = input.right;
 
-        var dx = (trigSign(Math.cos(radians)) * speed);
-        var dy = (trigSign(Math.sin(radians)) * speed);
+        var dx = (Math.cos(radians)) * speed;
+        var dy = (Math.sin(radians)) * speed;
 
         if (Math.abs(speed) > 1e-12) {
             x += dx;
@@ -52,7 +63,7 @@ function setup(driveSpeed, reverseSpeed, accelerationStep, rotationStep, accelIn
         return { x: x, y: y, a: a };
     }
 
-    config();
+    // ---
     return updatePlayer;
 }
 exports.setup = setup;

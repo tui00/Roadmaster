@@ -1,13 +1,14 @@
-// Display
+// === Параметры ===
 function setup(cellScale) {
+    // === Запуск и иницилизация дисплея ===
     I2C1.setup({ scl: D21, sda: D22 });
     var oled = require("SSD1306").connect(I2C1);
 
-    function rotate(points, deg) {
-        const c = Math.cos(deg * Math.PI / 180), s = Math.sin(deg * Math.PI / 180);
-        return points.map(e => [e[0] * c - e[1] * s, e[0] * s + e[1] * c]);
-    };
+    oled.clear();
+    oled.flip();
+    oled.setFontVector(16);
 
+    // === Форма машинки ===
     const ARROW = [
         [1, 0], // head
         [0, 0], // body
@@ -17,15 +18,26 @@ function setup(cellScale) {
         [-2, 1.4], // right wing
     ];
 
-    function configDisplay() {
-        oled.clear();
-        oled.flip();
-        oled.setFontVector(16);
+    // === Поворот ===
+    function rotate(points, deg) {
+        const c = Math.cos(deg * Math.PI / 180), s = Math.sin(deg * Math.PI / 180);
+        return points.map(e => [e[0] * c - e[1] * s, e[0] * s + e[1] * c]);
+    };
+
+    // === Отрисовка клетки в маштабе ===
+    function drawCell(x, y) {
+        oled.drawRect(x * cellScale, y * cellScale, (x + 1) * cellScale, (y + 1) * cellScale);
     }
 
+    function fillCell(x, y) {
+        oled.fillRect(x * cellScale, y * cellScale, (x + 1) * cellScale, (y + 1) * cellScale);
+    }
+
+    // === Основной цикл дисплея ===
     function updateDisplay(x, y, a) {
         oled.clear();
 
+        // Поворачиваем в нужную сторону машинку и рисуем
         rotate(ARROW, a).forEach((p, i) => {
             const x1 = x + Math.round(p[0]);
             const y1 = y + Math.round(p[1]);
@@ -36,15 +48,6 @@ function setup(cellScale) {
         oled.flip();
     }
 
-    function drawCell(x, y) {
-        oled.drawRect(x * cellScale, y * cellScale, (x + 1) * cellScale, (y + 1) * cellScale);
-    }
-
-    function fillCell(x, y) {
-        oled.fillRect(x * cellScale, y * cellScale, (x + 1) * cellScale, (y + 1) * cellScale);
-    }
-
-    configDisplay();
     return updateDisplay;
 }
 exports.setup = setup;

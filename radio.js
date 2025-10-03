@@ -1,16 +1,16 @@
-// Radio
+// === Параметры ===
 function setup(forwardPin, backwardPin, leftPin, rightPin, needUpdateRef) {
-    function config() {
-        setWatch(update, forwardPin, { edge: 0, repeat: true });
-        setWatch(update, backwardPin, { edge: 0, repeat: true });
-        setWatch(update, leftPin, { edge: 0, repeat: true });
-        setWatch(update, rightPin, { edge: 0, repeat: true });
-    }
+
+    setWatch(update, forwardPin, { edge: 0, repeat: true });
+    setWatch(update, backwardPin, { edge: 0, repeat: true });
+    setWatch(update, leftPin, { edge: 0, repeat: true });
+    setWatch(update, rightPin, { edge: 0, repeat: true });
 
     function update() {
         global[needUpdateRef] = true;
     }
 
+    // === Основной цикл обнавления пульта ===
     function readPins() {
         return {
             drive: !!forwardPin.read(),
@@ -20,7 +20,6 @@ function setup(forwardPin, backwardPin, leftPin, rightPin, needUpdateRef) {
         }
     }
 
-    config();
     return readPins;
 }
 exports.setup = setup;
