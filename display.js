@@ -1,12 +1,10 @@
 // === Параметры ===
 function setup(cellScale) {
     // === Запуск и иницилизация дисплея ===
-    I2C1.setup({ scl: D21, sda: D22 });
     var oled = require("SSD1306").connect(I2C1);
 
     oled.clear();
     oled.flip();
-    oled.setFontVector(16);
 
     // === Форма машинки ===
     const ARROW = [
