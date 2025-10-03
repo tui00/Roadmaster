@@ -18,6 +18,9 @@ const CARS = {
     KIA_SPORTAGE: [3.5, 1.5, 0.25, 0.35, 0.12, "Kia Sportage"],
     TOYOTA_CRETA: [3, 1, 0.2, 0.3, 0.15, "Toyota Creta"],
     VOLKSWAGEN_POLO: [2, 1, 0.2, 0.3, 0.1, "Volkswagen Polo"],
+    TESLA_MODEL_S: [5, 2, 0.3, 0.4, 0.1, "Tesla Model S"],
+    XIAOMI_SU7: [4.5, 1.5, 0.2, 0.3, 0.1, "Xiaomi SU7"],
+
     LADA_VESTA: [1, 4, 0.1, 0.15, -0.1, "Lada Vesta"],
 
     NO_CAR: [0, 0, 0, 0, 0, "This is a bug!"], // Посхалочка
