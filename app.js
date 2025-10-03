@@ -1,6 +1,6 @@
 // === Пины для пульта ===
-const FORWARD_PIN = D5;
-const BACKWARD_PIN = D18;
+const UP_PIN = D5;
+const DOWN_PIN = D18;
 const LEFT_PIN = D19;
 const RIGHT_PIN = D23;
 
@@ -81,14 +81,14 @@ var speed = 0;
 
 // Установка пинов в режим ввода
 [
-    FORWARD_PIN,
-    BACKWARD_PIN,
+    UP_PIN,
+    DOWN_PIN,
     LEFT_PIN,
     RIGHT_PIN
 ].forEach((pin) => pin.mode("input"));
 
 // Настройка пульта
-var radio = require("./radio").setup(FORWARD_PIN, BACKWARD_PIN, LEFT_PIN, RIGHT_PIN, "needUpdate");
+var radio = require("./radio").setup(UP_PIN, DOWN_PIN, LEFT_PIN, RIGHT_PIN, "needUpdate");
 // Настройка машины
 var controller = require("./controller").setup(
     maxDriveSpeed,
