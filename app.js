@@ -77,6 +77,7 @@ var needUpdate = true;
 var x = 2;
 var y = 2;
 var a = 45; // a -- angle
+var speed = 0;
 
 // Установка пинов в режим ввода
 [
@@ -101,6 +102,7 @@ var controller = require("./controller").setup(
     
     speedChangeInterval,
 
+    "speed",
     "needUpdate"
 );
 // Настройка дисплея

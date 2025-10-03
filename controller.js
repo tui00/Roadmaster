@@ -11,14 +11,15 @@ function setup(
 
     speedChangeInterval,
 
+    speedRef,
     needUpdateRef
 ) {
     var drive = false; // Мы едем прямо?
     var reverse = false; // Мы едем задним ходом?
-    var speed = 0; // Наша скорость
 
     // === Цикл обнавления скорости ===
     setInterval(() => {
+        var speed = global[speedRef]; // Наша скорость
         if (drive && speed < maxDriveSpeed) {
             global[needUpdateRef] = true;
             if (speed >= 1e-12) {
@@ -40,6 +41,7 @@ function setup(
             if (speed > 1e-12) speed -= neutralStep; // Останавливаемя, если не едем
             if (speed < -1e-12) speed += neutralStep;
         }
+        global[speedRef] = speed;
     }, speedChangeInterval);
 
     // == Основной цикл контроллера ===
@@ -51,10 +53,10 @@ function setup(
         var left = input.left;
         var right = input.right;
 
-        var dx = (Math.cos(radians)) * speed;
-        var dy = (Math.sin(radians)) * speed;
+        var dx = (Math.cos(radians)) * global[speedRef];
+        var dy = (Math.sin(radians)) * global[speedRef];
 
-        if (Math.abs(speed) > 1e-12) {
+        if (Math.abs(global[speedRef]) > 1e-12) {
             x += dx;
             y += dy;
         }
