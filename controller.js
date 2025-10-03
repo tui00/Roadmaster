@@ -21,7 +21,7 @@ function setup(
     setInterval(() => {
         if (drive && speed < maxDriveSpeed) {
             global[needUpdateRef] = true;
-            if (speed >= 0) {
+            if (speed >= 1e-12) {
                 speed += accelStep; // Ускоряемся
             } else {
                 speed += breakStep; // Тормозим
@@ -29,7 +29,7 @@ function setup(
         } else if (reverse && -speed < maxReverseSpeed) {
             global[needUpdateRef] = true;
 
-            if (speed <= 0) {
+            if (speed <= -1e-12) {
                 speed -= accelStep; // Ускоряемся
             } else {
                 speed -= breakStep; // Тормозим
@@ -37,8 +37,8 @@ function setup(
         }
         if (Math.abs(speed) > 1e-12 && !drive && !reverse) {
             global[needUpdateRef] = true;
-            if (speed > 0) speed -= neutralStep; // Останавливаемя, если не едем
-            if (speed < 0) speed += neutralStep;
+            if (speed > 1e-12) speed -= neutralStep; // Останавливаемя, если не едем
+            if (speed < -1e-12) speed += neutralStep;
         }
     }, speedChangeInterval);
 
