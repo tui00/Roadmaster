@@ -69,4 +69,4 @@ function show(
     // ---
     setInterval(updateMenu, updateInterval);
 }
-exports.setup = show;
+exports.show = show;

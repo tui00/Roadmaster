@@ -64,7 +64,7 @@ var speed = 0;
 
 function startMenuAndGame() {
     // Запуск меню
-    require("./menu").setup(
+    require("./menu").show(
         UP_PIN,
         DOWN_PIN,
         RIGHT_PIN,
