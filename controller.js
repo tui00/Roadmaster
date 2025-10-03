@@ -17,7 +17,7 @@ function setup(driveSpeed, reverseSpeed, accelerationStep, rotationStep, accelIn
             } else if (reverse && -speed < reverseSpeed) {
                 speed -= accelerationStep;
             }
-            if (speed != 0 && !drive && !reverse) {
+            if (Math.abs(speed) > 1e-12 && !drive && !reverse) {
                 global[needUpdateRef] = true;
                 if (speed > 0) speed -= accelerationStep;
                 if (speed < 0) speed += accelerationStep;
@@ -39,7 +39,7 @@ function setup(driveSpeed, reverseSpeed, accelerationStep, rotationStep, accelIn
         var dx = (trigSign(Math.cos(radians)) * speed);
         var dy = (trigSign(Math.sin(radians)) * speed);
 
-        if (speed != 0) {
+        if (Math.abs(speed) > 1e-12) {
             x += dx;
             y += dy;
         }
