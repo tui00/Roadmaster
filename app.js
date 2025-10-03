@@ -61,7 +61,7 @@ const CARS = {
 const maxDriveSpeed = currentCar().maxDriveSpeed;
 const maxReverseSpeed = currentCar().maxReverseSpeed;
 // -
-const accelStep = currentCar().accelStep; // В реальных машинах тормоз тоже сильнее двигателя 
+const accelStep = currentCar().accelStep;
 const breakStep = currentCar().breakStep;
 const neutralStep = currentCar().neutralStep;
 // -
