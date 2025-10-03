@@ -1,10 +1,11 @@
 // Controller
-function setup(driveSpeed, reverseSpeed, needUpdateRef) {
+function setup(driveSpeed, reverseSpeed, accelerationStep, rotationStep, accelInterval, needUpdateRef) {
     var drive = false;
     var reverse = false;
     var speed = 0;
 
-    const trigSign = v => Math.abs(v) < 1e-12 ? 0 : Math.sign(v);
+    const trigSign = v => v;
+    // const trigSign = v => Math.abs(v) < 1e-12 ? 0 : Math.sign(v);
     // Комментарий: функция устраняет «дрожание» из-за неточных вычислений.
     // Если значение почти ноль (например, cos(90°) = 6.12e-17), оно обнуляется.
     // Иначе возвращается знак (+1 или -1). Это делает движение дискретным.
@@ -12,16 +13,16 @@ function setup(driveSpeed, reverseSpeed, needUpdateRef) {
     function config() {
         setInterval(() => {
             if (drive && speed < driveSpeed) {
-                speed++;
+                speed += accelerationStep;
             } else if (reverse && -speed < reverseSpeed) {
-                speed--;
+                speed -= accelerationStep;
             }
             if (speed != 0 && !drive && !reverse) {
                 global[needUpdateRef] = true;
-                if (speed > 0) speed--;
-                if (speed < 0) speed++;
+                if (speed > 0) speed -= accelerationStep;
+                if (speed < 0) speed += accelerationStep;
             }
-        }, 500);
+        }, accelInterval);
     }
 
     function updatePlayer(x, y, a, input) {
@@ -38,13 +39,13 @@ function setup(driveSpeed, reverseSpeed, needUpdateRef) {
         var dx = (trigSign(Math.cos(radians)) * speed);
         var dy = (trigSign(Math.sin(radians)) * speed);
 
-        if (drive || reverse || speed != 0) {
+        if (speed != 0) {
             x += dx;
             y += dy;
         }
 
-        if (left) a -= 45;
-        if (right) a += 45;
+        if (left) a -= rotationStep;
+        if (right) a += rotationStep;
 
         a = (a + (360)) % 360;
 

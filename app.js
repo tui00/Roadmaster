@@ -9,6 +9,9 @@ const CELL_SCALE = 5;
 
 var driveSpeed = 2;
 var reverseSpeed = 1;
+var accelerationStep = 0.1;
+var rotationStep = 45;
+var accelInterval = 100;
 
 var needUpdate = true;
 
@@ -25,7 +28,7 @@ var a = 135;
 ].forEach((pin) => pin.mode("input"));
 
 var radio = require("./radio").setup(FORWARD_PIN, BACKWARD_PIN, LEFT_PIN, RIGHT_PIN, "needUpdate");
-var controller = require("./controller").setup(driveSpeed, reverseSpeed, "needUpdate");
+var controller = require("./controller").setup(driveSpeed, reverseSpeed, accelerationStep, rotationStep, accelInterval, "needUpdate");
 var display = require("./display").setup(CELL_SCALE);
 setInterval(() => {
     if (needUpdate) {
