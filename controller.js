@@ -61,8 +61,8 @@ function setup(
             y += dy;
         }
 
-        if (left) a -= rotationStep;
-        if (right) a += rotationStep;
+        if (left) a += rotationStep;
+        if (right) a -= rotationStep;
 
         a = (a + (360)) % 360;
 

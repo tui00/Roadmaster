@@ -9,14 +9,14 @@ function setup(cellScale) {
     // === Форма машинки ===
     const ARROW = [
         [2, 0], // head
-        [2, -1.4], // up left wheel 
-        [2, 1.4], // up right wheel
+        [2, 1.4], // up left wheel 
+        [2, -1.4], // up right wheel
         [1, 0], // body
         [0, 0], // body
         [-1, 0], // body
         [-2, 0], // tall
-        [-2, -1.4], // bottom left wheel 
-        [-2, 1.4], // bottom right wheel
+        [-2, 1.4], // bottom left wheel 
+        [-2, -1.4], // bottom right wheel
     ];
 
     // === Поворот ===
@@ -27,11 +27,11 @@ function setup(cellScale) {
 
     // === Отрисовка клетки в маштабе ===
     function drawCell(x, y) {
-        oled.drawRect(x * cellScale, y * cellScale, (x + 1) * cellScale, (y + 1) * cellScale);
+        oled.drawRect(x * cellScale, 64 - (y * cellScale), (x + 1) * cellScale, 64 - ((y + 1) * cellScale));
     }
 
     function fillCell(x, y) {
-        oled.fillRect(x * cellScale, y * cellScale, (x + 1) * cellScale, (y + 1) * cellScale);
+        oled.fillRect(x * cellScale, 64 - (y * cellScale), (x + 1) * cellScale, 64 - ((y + 1) * cellScale));
     }
 
     // === Основной цикл дисплея ===
