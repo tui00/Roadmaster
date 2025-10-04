@@ -8,7 +8,7 @@ function setup(forwardPin, backwardPin, leftPin, rightPin, inputRef, needUpdateR
 
     function update() {
         global[needUpdateRef] = true;
-        global[input] = readPins();
+        global[inputRef] = readPins();
     }
 
     // === Основная функция обновления пульта ===
