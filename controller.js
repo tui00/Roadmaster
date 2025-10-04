@@ -17,20 +17,20 @@ function setup(
     var drive = false; // Мы едем прямо?
     var reverse = false; // Мы едем задним ходом?
 
-    // === Цикл обнавления скорости ===
+    // === Цикл обновления скорости ===
     setInterval(() => {
         var speed = global[speedRef]; // Наша скорость
         if (drive && speed < maxDriveSpeed) {
             global[needUpdateRef] = true;
-            if (speed >= 1e-12) {
+            if (speed >= -1e-12) { 
                 speed += accelStep; // Ускоряемся
             } else {
-                speed += breakStep; // Тормозим
+                speed += breakStep; // Тормозим, сдесь += потому что сейчас скорость меньше нуля, что-бы остановиться скорость должна стать нулем
             }
         } else if (reverse && -speed < maxReverseSpeed) {
             global[needUpdateRef] = true;
 
-            if (speed <= -1e-12) {
+            if (speed <= 1e-12) {
                 speed -= accelStep; // Ускоряемся
             } else {
                 speed -= breakStep; // Тормозим

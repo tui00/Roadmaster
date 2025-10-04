@@ -11,9 +11,9 @@ function setup(cellScale) {
         [2, 0], // head
         [2, -1.4], // up left wheel 
         [2, 1.4], // up right wheel
-        [1, 0], // head
+        [1, 0], // body
         [0, 0], // body
-        [-1, 0], // tall
+        [-1, 0], // body
         [-2, 0], // tall
         [-2, -1.4], // bottom left wheel 
         [-2, 1.4], // bottom right wheel

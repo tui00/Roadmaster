@@ -1,5 +1,5 @@
 // === Параметры ===
-function setup(forwardPin, backwardPin, leftPin, rightPin, needUpdateRef) {
+function setup(forwardPin, backwardPin, leftPin, rightPin, inputRef, needUpdateRef) {
 
     setWatch(update, forwardPin, { edge: 0, repeat: true });
     setWatch(update, backwardPin, { edge: 0, repeat: true });
@@ -8,9 +8,10 @@ function setup(forwardPin, backwardPin, leftPin, rightPin, needUpdateRef) {
 
     function update() {
         global[needUpdateRef] = true;
+        global[input] = readPins();
     }
 
-    // === Основной цикл обнавления пульта ===
+    // === Основная функция обновления пульта ===
     function readPins() {
         return {
             drive: !!forwardPin.read(),
@@ -19,7 +20,5 @@ function setup(forwardPin, backwardPin, leftPin, rightPin, needUpdateRef) {
             right: !!rightPin.read(),
         }
     }
-
-    return readPins;
 }
 exports.setup = setup;

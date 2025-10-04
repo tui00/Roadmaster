@@ -27,10 +27,10 @@ function show(
 
     const addToCurr = num => {
         return () => {
-            curr = (curr + num + cars.length) % cars.length;
+            curr = (curr + num + (cars.length - 1)) % (cars.length - 1);
             page = Math.floor(curr / carsPerPage);
             needUpdate = true;
-        }
+        };
     };
 
     var upId = setWatch(addToCurr(-1), upPin, { edge: -1, repeat: true });
@@ -38,6 +38,8 @@ function show(
     setWatch(() => {
         clearWatch(upId);
         clearWatch(downId);
+
+        clearInterval(updId);
 
         global[currentCarRef] = cars[curr];
 
@@ -67,6 +69,6 @@ function show(
     }
 
     // ---
-    setInterval(updateMenu, updateInterval);
+    var updId = setInterval(updateMenu, updateInterval);
 }
 exports.show = show;
