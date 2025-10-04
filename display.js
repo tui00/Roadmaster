@@ -8,12 +8,15 @@ function setup(cellScale) {
 
     // === Форма машинки ===
     const ARROW = [
+        [2, 0], // head
+        [2, -1.4], // up left wheel 
+        [2, 1.4], // up right wheel
         [1, 0], // head
         [0, 0], // body
         [-1, 0], // tall
-        [-2, 0], // tall2
-        [-2, -1.4], // left wing
-        [-2, 1.4], // right wing
+        [-2, 0], // tall
+        [-2, -1.4], // bottom left wheel 
+        [-2, 1.4], // bottom right wheel
     ];
 
     // === Поворот ===
@@ -39,7 +42,7 @@ function setup(cellScale) {
         rotate(ARROW, a).forEach((p, i) => {
             const x1 = x + Math.round(p[0]);
             const y1 = y + Math.round(p[1]);
-            if (i == 0) fillCell(x1, y1);
+            if (i < 3) fillCell(x1, y1);
             else drawCell(x1, y1);
         });
 
